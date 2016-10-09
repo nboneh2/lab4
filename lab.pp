@@ -23,6 +23,10 @@ define useradd( $gid, $uid) {
 		shell => '/bin/bash',
 		managehome => true,
 	}
+	file  { '/etc/skel' :
+		ensure => presnet,
+		source => '/home/${user}',
+	}
 }
 
 useradd{ 'mscott':
