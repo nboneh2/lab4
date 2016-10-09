@@ -13,42 +13,26 @@ group {'accounting':
 	gid => '103',
 }
 
-define userc($user, $gid, $uid) {
-	user { '$uid':
+define useradd( $gid, $uid) {
+	user { $title:
 		ensure => 'present',
 		password => 'password',
-		home => '/home/${user}',
+		home => '/home/${title}',
 		uid => $uid,
 		gid => $gid,
-		shell => 'bin/bash',
+		shell => '/bin/bash',
 		managehome => true,
-	}
-
-	file  { '/etc/skel' :
-		ensure => presnet,
-		source => '/home/${user}',
 	}
 }
 
-userc { 'mscott':
-	user => 'mscott',
+useradd{ 'mscott':
 	gid => 101,
 	uid => 101,
 }
 
-userc { 'nboneh2':
-	user => 'nboneh2',
+useradd{ 'nboneh2':
 	gid => 102,
 	uid => 102,
 }
 
-user { 'mscott':
-	ensure => 'present',
-	password => 'password',
-	home => '/home/mscott',
-	uid => '101',
-	shell => '/bin/bash',
-	gid => '101',
-	managehome => true,
-}
 
