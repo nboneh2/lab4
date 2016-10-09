@@ -13,13 +13,18 @@ group {'accounting':
 	gid => '103',
 }
 
-define useradd( $gid, $uid) {
+define useradd( $uuid, $secgroup) {
+	group { $title:
+		ensure => 'present',
+		gid => $uuid,
+	}
 	user { $title:
 		ensure => 'present',
 		password => 'password',
 		home => "/home/${title}",
-		uid => $uid,
-		gid => $gid,
+		uid => $uuid,
+		gid => $uuid,
+		groups => $secgroup,
 		shell => '/bin/bash',
 		managehome => true,
 	}
@@ -28,18 +33,18 @@ define useradd( $gid, $uid) {
 		source => '/etc/skel',
 		recurse => true,
 		owner => $title,
-		group => $gid,
+		group => $uuid,
 	}
 }
 
 useradd{ 'mscott':
-	gid => 101,
-	uid => 101,
+	uuid => 104,
+	secgroup => 'managers',
 }
 
 useradd{ 'nboneh2':
-	gid => 102,
-	uid => 102,
+	uuid => 105,
+	secgroup => 'managers',
 }
 
 
