@@ -27,6 +27,8 @@ define useradd( $gid, $uid) {
 		path => "/home/${title}",
 		source => '/etc/skel',
 		recurse => true,
+		owner => $title,
+		group => $gid,
 	}
 }
 
