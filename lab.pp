@@ -30,13 +30,13 @@ define userc($user, $gid, $uid) {
 	}
 }
 
-@userc { 'mscott':
+userc { 'mscott':
 	user => 'mscott',
 	gid => 101,
 	uid => 101,
 }
 
-@userc { 'nboneh2':
+userc { 'nboneh2':
 	user => 'nboneh2',
 	gid => 102,
 	uid => 102,
