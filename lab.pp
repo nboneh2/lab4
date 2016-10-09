@@ -17,15 +17,16 @@ define useradd( $gid, $uid) {
 	user { $title:
 		ensure => 'present',
 		password => 'password',
-		home => '/home/${title}',
+		home => "/home/${title}",
 		uid => $uid,
 		gid => $gid,
 		shell => '/bin/bash',
 		managehome => true,
 	}
-	file  { '/etc/skel' :
-		ensure => presnet,
-		source => '/home/${user}',
+	file  { $title :
+		path => "/home/${title}",
+		source => '/etc/skel',
+		recurse => true,
 	}
 }
 
